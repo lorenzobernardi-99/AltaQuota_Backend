@@ -12,6 +12,9 @@ COPY .mvn .mvn
 COPY mvnw .
 COPY src src
 
+# Aggiungi i permessi di esecuzione!
+RUN chmod +x mvnw
+
 # Esegui il build con Maven (questo risolve anche il problema dei permessi!)
 RUN ./mvnw clean package -DskipTests
 
@@ -28,4 +31,5 @@ COPY --from=build /build/target/gestionale-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8080
 
 # Comando per avviare l'applicazione
+
 ENTRYPOINT ["java", "-jar", "app.jar"]
